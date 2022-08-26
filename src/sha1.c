@@ -144,16 +144,6 @@ sha1_with_key(uint8_t *key, uint8_t *buf, int len, uint8_t *out)
 	}
 }
 
-#undef ROTL
-#undef F1
-#undef F2
-#undef F3
-#undef F4
-#undef K1
-#undef K2
-#undef K3
-#undef K4
-
 #define ROTL(n, x) ((x << n) | (x >> (32 - n)))
 
 #define F1(x, y, z) ((x & y) ^ (~x & z))

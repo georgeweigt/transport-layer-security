@@ -158,15 +158,6 @@ sha384_with_key(uint8_t *key, uint8_t *buf, int len, uint8_t *out)
 	}
 }
 
-#undef Ch
-#undef Maj
-#undef ROTR
-#undef Sigma0
-#undef Sigma1
-#undef sigma0
-#undef sigma1
-#undef K
-
 #define Ch(x, y, z) (((x) & (y)) ^ (~(x) & (z)))
 #define Maj(x, y, z) (((x) & (y)) ^ ((x) & (z)) ^ ((y) & (z)))
 
