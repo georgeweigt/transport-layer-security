@@ -58,12 +58,12 @@ main(int argc, char **argv)
 
 		if (pollfd.revents & POLLERR) {
 			printf("POLLERR\n");
-			exit(1);
+//			exit(1);
 		}
 
 		if (pollfd.revents & POLLHUP) {
 			printf("POLLHUP\n");
-			exit(1);
+//			exit(1);
 		}
 
 		if (p->send_len)

@@ -37,5 +37,4 @@ The document has moved
 <A HREF="https://www.google.com/">here</A>.
 </BODY></HTML>
 POLLHUP
-$ 
 ```
