@@ -1,0 +1,108 @@
+\documentclass[12pt]{article}
+\usepackage{fancyvrb,amsmath,amsfonts,amssymb,graphicx,listings}
+\usepackage[usenames,dvipsnames,svgnames,table]{xcolor}
+%\usepackage{parskip}
+\usepackage{slashed}
+\usepackage{tikz}
+\usepackage{mathrsfs}
+
+% change margins
+\addtolength{\oddsidemargin}{-.875in}
+\addtolength{\evensidemargin}{-.875in}
+\addtolength{\textwidth}{1.75in}
+\addtolength{\topmargin}{-.875in}
+\addtolength{\textheight}{1.75in}
+
+\hyphenpenalty=10000
+
+\begin{document}
+
+\begin{center}
+{\sc starting apache}
+\end{center}
+
+\noindent
+{\bf Step 1. Edit ``httpd.conf'' file and change 3 lines.}
+
+\begin{Verbatim}
+sudo vi /etc/apache2/httpd.conf
+
+-#LoadModule socache_shmcb_module libexec/apache2/mod_socache_shmcb.so
++LoadModule socache_shmcb_module libexec/apache2/mod_socache_shmcb.so
+
+-#LoadModule ssl_module libexec/apache2/mod_ssl.so
++LoadModule ssl_module libexec/apache2/mod_ssl.so
+
+-#Include /private/etc/apache2/extra/httpd-ssl.conf
++Include /private/etc/apache2/extra/httpd-ssl.conf
+\end{Verbatim}
+
+\noindent
+{\bf Step 2. Edit ``httpd-ssl.conf'' file and change 2 lines.}
+
+\begin{Verbatim}
+sudo vi /etc/apache2/extra/httpd-ssl.conf
+
+-SSLCertificateFile "/private/etc/apache2/server.crt"
++SSLCertificateFile "/private/etc/apache2/my-cert.pem"
+
+-SSLCertificateKeyFile "/private/etc/apache2/server.key"
++SSLCertificateKeyFile "/private/etc/apache2/my-key.pem"
+\end{Verbatim}
+
+\noindent
+{\bf Step 3. Create a certificate and key using the following bash script.}
+
+\begin{Verbatim}
+#!/bin/bash
+name=localhost
+openssl genrsa -out my-key.pem 2048
+openssl req -new -key my-key.pem -out my-csr.pem -subj "/O=$name/CN=$name"
+echo -e "basicConstraints=critical,CA:true,pathlen:0\nsubjectAltName=DNS:$name"\
+ >ext.tmp
+openssl x509 -req -days 3650 -in my-csr.pem -signkey my-key.pem -out my-cert.pem\
+ -extfile ext.tmp
+rm ext.tmp
+\end{Verbatim}
+
+\noindent
+{\bf Step 4. Copy certificate files to ``apache2'' directory.}
+
+\begin{Verbatim}
+sudo cp my-cert.pem my-key.pem /etc/apache2
+\end{Verbatim}
+
+\noindent
+{\bf Step 5. Start Apache.}
+
+\begin{Verbatim}
+sudo apachectl start
+\end{Verbatim}
+
+\noindent
+{\bf More info}
+
+\noindent
+Start Apache automatically on boot.
+
+\begin{Verbatim}
+sudo launchctl load -w \
+ /System/Library/LaunchDaemons/org.apache.httpd.plist
+\end{Verbatim}
+
+\noindent
+Stop Apache from starting on boot.
+
+\begin{Verbatim}
+sudo launchctl unload -w \
+ /System/Library/LaunchDaemons/org.apache.httpd.plist
+\end{Verbatim}
+
+\noindent
+Print certificate file.
+
+\begin{Verbatim}
+openssl x509 -in cert.pem -noout -text
+\end{Verbatim}
+
+\end{document}
