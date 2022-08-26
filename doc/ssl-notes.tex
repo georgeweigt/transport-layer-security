@@ -1,20 +1,11 @@
-\documentclass[11pt]{article}
-\usepackage{fancyhdr,amsmath,amsfonts,mathrsfs,graphicx,parskip,listings}
-
-% change margins
-\addtolength{\oddsidemargin}{-.875in}
-\addtolength{\evensidemargin}{-.875in}
-\addtolength{\textwidth}{1.75in}
-\addtolength{\topmargin}{-.875in}
-\addtolength{\textheight}{1.75in}
-
+\documentclass[12pt]{article}
+%\usepackage[margin=1in]{geometry}
+\usepackage{amsmath}
+\parindent=0pt
 \begin{document}
 
-\begin{center}
-{\sc SSL NOTES}
-\end{center}
-
 \subsection*{Record Format}
+
 SSL runs on top of TCP.
 Recall that TCP is a stream protocol that erases packet boundaries.
 In order to provide for in-band signalling in a stream protocol,
@@ -45,6 +36,7 @@ the payload length but also the start of the next record.
 When SSL switches to encrypted mode, only the payload is encrypted.
 The header is always sent in the clear to maintain synchronization.
 
+\bigskip
 RFC 2246 defines the following content types. (See RFC 2246 page 17.)
 
 \begin{center}
@@ -61,6 +53,7 @@ Application Data & 23\\
 \end{center}
 
 \subsection*{Handshake Protocol}
+
 SSL defines a handshake protocol for sending connection setup messages.
 The handshake protocol uses content type 22 (0x16) in the
 first byte of the record header.
@@ -85,6 +78,7 @@ Handshake Payload & $m$ bytes\\
 \end{center}
 
 \subsection*{Typical HTTPS Transaction}
+
 The following table shows what happens during a
 typical HTTPS session.
 Messages in angle brackets are encrypted.
@@ -115,6 +109,7 @@ $\langle$ Close Notify $\rangle$ & $\longrightarrow$ &\\
 \end{center}
 
 \subsection*{Certificates}
+
 A certificate is a collection of type-length-value objects (TLVs) with the
 property that TLVs can be nested.
 In other words, the V of a TLV can itself contain more TLVs.
@@ -125,7 +120,8 @@ into groups.
 The following diagram is a general outline of how certificate data is organized
 (not all TLVs are shown).
 
-\begin{lstlisting}
+{\scriptsize
+\begin{verbatim}
   SEQUENCE
   | SEQUENCE                Certificate Info
   | | INTEGER               Serial Number
@@ -145,7 +141,8 @@ The following diagram is a general outline of how certificate data is organized
   | | OBJECT ID             Certificate Signature Algorithm
   | | NULL
   | BIT STRING              Certificate Signature Value
-\end{lstlisting}
+\end{verbatim}
+}
 
 The client computer uses the certificate key to encrypt its pre-master
 secret.
@@ -154,29 +151,37 @@ The certificate key is not used for any other type of encryption.
 After the connection is established, application data is encrypted using
 keys derived from the pre-master secret.
 
+\bigskip
 Self-signed certificates can be checked by encrypting the signature value
 using the public key found in the certificate itself.
 The result is then compared to a hash of the Certificate Info data.
 
 \subsection*{RSA encryption}
+
 The client computer
 uses RSA encryption to securely transmit the client's
 48-byte pre-master secret to the web server.
 
+\bigskip
 Let $n$ and $e$ be RSA public keys where $n$ is the modulus and $e$
 is the exponent.
-Typically $e=65,537$ and $n$ is either 1,024 or 2,048 bits long.
 Let $P$ be a plaintext such that bit-wise numerically $P<n$.
 Then ciphertext $C$ is obtained from $P$ by raising $P$ to the
 power $e$ modulo $n$.
-$$C=P^e\bmod n$$
+\begin{equation*}
+C=P^e\bmod n
+\end{equation*}
+
 Only the originator of the public keys $n$ and $e$ can decrypt
 $C$ and obtain $P$.
-The function ``modpow'' in ssl-demo.c implements $P^e\bmod n$.
 
+\bigskip
 There is also a padding requirement that ensures a strong cipher.
 The padding is specified in RFC 3447 page 25 as follows.
-$$P=\text{0x00}\mid\text{0x02}\mid U\mid\text{0x00}\mid M$$
+\begin{equation*}
+P=\text{0x00}\mid\text{0x02}\mid U\mid\text{0x00}\mid M
+\end{equation*}
+
 $M$ is the actual message to encrypt.
 $U$ is a sequence of non-zero random bytes.
 The vertical bar is a concatenation operator.
@@ -190,18 +195,21 @@ its most significant bit set.
 
 \section*{References}
 
-A Layman's Guide to a Subset of ASN.1, BER, and DER\newline
-http://luca.ntop.org/Teaching/Appunti/asn1.html
+A Layman's Guide to a Subset of ASN.1, BER, and DER
 
+\bigskip
 FIPS Publication 180-4, Secure Hash Standard
 
+\bigskip
 RFC 1321 The MD5 Message-Digest Algorithm
 
+\bigskip
 RFC 2104 HMAC: Keyed-Hashing for Message Authentication
 
+\bigskip
 RFC 2246 The TLS Protocol Version 1.0
 
-RFC 3447 Public-Key Cryptography Standards (PKCS) \#1: RSA Cryptography
-Specifications Version 2.1
+\bigskip
+RFC 3447 Public-Key Cryptography Standards (PKCS) \#1: RSA Cryptography Specifications Version 2.1
 
 \end{document}
