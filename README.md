@@ -1,4 +1,4 @@
-The following demo program uses https to get a web page.
+The following demo program uses bespoke https to get a web page.
 
 To build and run
 
