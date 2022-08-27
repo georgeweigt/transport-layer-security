@@ -1,5 +1,3 @@
-#include "defs.h"
-
 //          ______
 //         |______| 69 bytes (5 for header, 64 for iv)
 //   buf ->|      |

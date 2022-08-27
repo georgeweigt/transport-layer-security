@@ -1,5 +1,3 @@
-#include "defs.h"
-
 void
 rc4_init(struct ssl_session *p, unsigned char *encrypt_key, unsigned char *decrypt_key)
 {

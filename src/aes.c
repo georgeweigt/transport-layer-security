@@ -1,5 +1,3 @@
-#include "defs.h"
-
 static uint32_t w[44], v[44];
 
 // Expanded key layout:

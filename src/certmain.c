@@ -1,5 +1,3 @@
-#include "defs.h"
-
 static char strbuf[100];
 static unsigned char certificate[10000];
 static int certificate_length;

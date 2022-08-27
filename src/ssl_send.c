@@ -1,5 +1,3 @@
-#include "defs.h"
-
 void
 ssl_send(struct ssl_session *p)
 {

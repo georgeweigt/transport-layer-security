@@ -1,5 +1,3 @@
-#include "defs.h"
-
 void
 ssl_recv_alert(struct ssl_session *p)
 {

@@ -1,5 +1,3 @@
-#include "defs.h"
-
 struct ssl_session ssl_session;
 
 int

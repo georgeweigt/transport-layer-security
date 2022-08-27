@@ -21,7 +21,6 @@
 // |        | Last certificate
 // |________|
 
-#include "defs.h"
 static int debug = 1;
 int cert_malloc_count;
 

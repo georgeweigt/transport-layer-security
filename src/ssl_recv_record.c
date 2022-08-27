@@ -1,5 +1,3 @@
-#include "defs.h"
-
 void
 ssl_recv_record(struct ssl_session *p, uint8_t *record_buf, int record_len)
 {

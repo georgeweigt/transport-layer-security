@@ -6,8 +6,6 @@
 //
 // ssl_data_in()
 
-#include "defs.h"
-
 int ssl_malloc_count;
 static int allow_missing_length_field = 1; // common error in older browsers
 

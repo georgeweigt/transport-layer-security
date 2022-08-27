@@ -4,8 +4,6 @@
 //
 // rsa_decrypt()	In-place decryption using private key from provisioning file key.pem
 
-#include "defs.h"
-
 // buf = (buf ** exponent) mod modulus
 
 void

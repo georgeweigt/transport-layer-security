@@ -1,5 +1,3 @@
-#include "defs.h"
-
 void
 hmac_sha1(uint8_t *key, int keylen, uint8_t *buf, int len, uint8_t *out)
 {

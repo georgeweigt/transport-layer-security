@@ -11,8 +11,6 @@
 // ecdhe256_verify_hash()	Verify emphemeral key hash
 // ecdhe384_verify_hash()
 
-#include "defs.h"
-
 #define len(p) (p)[-1]
 static int ec_malloc_count;
 static unsigned *p256, *q256, *gx256, *gy256;

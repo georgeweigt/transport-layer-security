@@ -1,5 +1,3 @@
-#include "defs.h"
-
 // decrypt payload then check hmac
 
 void

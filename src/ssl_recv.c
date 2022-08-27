@@ -1,5 +1,3 @@
-#include "defs.h"
-
 // call when socket has receive data
 
 void

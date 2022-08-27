@@ -6,3 +6,6 @@ default:
 
 make-prototypes: make-prototypes.c
 	gcc -O0 -o make-prototypes make-prototypes.c
+
+test-hmac: test-hmac.c
+	gcc -O0 -o test-hmac test-hmac.c
