@@ -1,4 +1,4 @@
-The following demo program downloads a web page via https.
+The following demo program gets a web page via https.
 
 To build and run
 
