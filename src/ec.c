@@ -709,7 +709,7 @@ static char *str_gy384 =
 	"e9da3113b5f0b8c00a60b1ce1d7e819d7a431d7c90ea0e5f";
 
 void
-ec_init()
+ec_init(void)
 {
 	p256 = ec_hexstr_to_bignum(str_p256);
 	q256 = ec_hexstr_to_bignum(str_q256);
@@ -1944,7 +1944,7 @@ ec_buf_to_bignum(unsigned char *buf, int len)
 }
 
 void
-ec_test()
+ec_test(void)
 {
 	int t = ec_malloc_count;
 	ec_test_full_add();
@@ -1960,7 +1960,7 @@ ec_test()
 }
 
 void
-ec_test_full_add()
+ec_test_full_add(void)
 {
 	unsigned *p, *x, *y;
 	struct point R, S, T;
@@ -2029,7 +2029,7 @@ ec_test_full_add()
 }
 
 void
-ec_test_full_sub()
+ec_test_full_sub(void)
 {
 	unsigned *p, *x, *y;
 	struct point R, S, T;
@@ -2098,7 +2098,7 @@ ec_test_full_sub()
 }
 
 void
-ec_test_double()
+ec_test_double(void)
 {
 	unsigned *p, *x, *y;
 	struct point R, S;
@@ -2154,7 +2154,7 @@ ec_test_double()
 }
 
 void
-ec_test_mult()
+ec_test_mult(void)
 {
 	unsigned *d, *p, *x, *y;
 	struct point R, S;
@@ -2217,7 +2217,7 @@ ec_test_mult()
 }
 
 void
-ec_test_twin_mult()
+ec_test_twin_mult(void)
 {
 	unsigned *d, *e, *p, *x, *y;
 	struct point R, S, T;
@@ -2315,7 +2315,7 @@ ec_test_twin_mult()
 //        :   }
 
 void
-ec_test256()
+ec_test256(void)
 {
 	unsigned *d, *h, *r, *s, *x, *y;
 	unsigned char sig[64];
@@ -2389,7 +2389,7 @@ ec_test256()
 //       :   }
 
 void
-ec_test384()
+ec_test384(void)
 {
 	unsigned *d, *h, *r, *s, *x, *y;
 	unsigned char sig[96];
@@ -2443,7 +2443,7 @@ ec_test384()
 }
 
 void
-ecdh_test()
+ecdh_test(void)
 {
 	unsigned *dA, *dB;
 	struct point RA, RB, SA, SB;

@@ -1,4 +1,4 @@
-#define SSLTRACE printf("T %s\n", __func__); // uncomment to debug seg faults
+#define SSLTRACE printf("T %s %s %d\n", __func__, __FILE__, __LINE__); // uncomment to debug seg faults
 
 #define SSLPAD 128 // good for aes 512
 
