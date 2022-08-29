@@ -1,6 +1,6 @@
 #!/bin/bash
 
-name=eigenmath.org
+name=georgeweigt.github.io
 
 openssl genrsa -out key.pem 2048
 openssl req -new -key key.pem -out csr.pem -subj "/O=$name/CN=$name"
