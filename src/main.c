@@ -8,8 +8,10 @@ main(int argc, char **argv)
 	struct pollfd pollfd;
 	struct ssl_session *p = &ssl_session;
 
-	if (argc < 2)
+	if (argc < 2) {
+		printf("usage: demo hostname\n");
 		exit(1);
+	}
 
 	aes_init();
 	ec_init();
