@@ -4,7 +4,9 @@ name=georgeweigt.github.io
 
 openssl ecparam -out key.pem -name prime256v1 -genkey
 openssl req -new -key key.pem -out csr.pem -subj "/O=$name/CN=$name"
-openssl x509 -req -days 3650 -in csr.pem -signkey key.pem -out cert.pem
+echo -e "basicConstraints=critical,CA:true,pathlen:0\nsubjectAltName=DNS:$name" >ext.tmp
+openssl x509 -req -days 3650 -in csr.pem -signkey key.pem -out cert.pem -extfile ext.tmp
+rm ext.tmp
 
 # convert to DER for dumpasn1
 #openssl x509 -in cert.pem -inform PEM -out cert.der -outform DER
