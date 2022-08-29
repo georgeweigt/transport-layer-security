@@ -4,7 +4,6 @@ To build and run
 
 ```
 cd src
-./make-cert-rsa
 make
 ./demo google.com
 ```
