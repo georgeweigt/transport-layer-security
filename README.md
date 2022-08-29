@@ -40,3 +40,9 @@ POLLHUP
 ssl_disconnect (half_close) from line 26
 ssl_malloc_count 0
 ```
+
+To run a self test
+
+```
+./demo selftest
+```

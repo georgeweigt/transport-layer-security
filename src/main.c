@@ -8,20 +8,25 @@ main(int argc, char **argv)
 	struct pollfd pollfd;
 	struct ssl_session *p = &ssl_session;
 
-	aes_init();
+	if (argc < 2)
+		exit(1);
 
-	if (argc > 1 && strcmp(argv[1], "server") == 0)
+	aes_init();
+	ec_init();
+
+	if (strcmp(argv[1], "selftest") == 0)
+		selftest();
+
+	if (strcmp(argv[1], "server") == 0)
 		server();
 
 	port = 443;
 	hostname = "localhost";
 
-	if (argc > 1) {
-		if (strcmp(argv[1], "client") == 0)
-			port = 8443;
-		else
-			hostname = argv[1];
-	}
+	if (strcmp(argv[1], "client") == 0)
+		port = 8443;
+	else
+		hostname = argv[1];
 
 	fd = open_tcp_socket(hostname, port);
 

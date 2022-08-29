@@ -1,60 +1,5 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <stdint.h>
-
-void hmac_md5(uint8_t *key, int keylen, uint8_t *buf, int len, uint8_t *out);
-void md5(uint8_t *buf, int len, uint8_t *out);
-void md5_with_key(uint8_t *key, uint8_t *buf, int len, uint8_t *out);
-void md5_hash_block(uint8_t *buf, uint32_t *hash);
-void hmac_sha1(uint8_t *key, int keylen, uint8_t *buf, int len, uint8_t *out);
-void sha1(uint8_t *buf, int len, uint8_t *out);
-void sha1_with_key(uint8_t *key, uint8_t *buf, int len, uint8_t *out);
-void sha1_hash_block(uint8_t *buf, uint32_t *hash);
-void hmac_sha224(uint8_t *key, int keylen, uint8_t *buf, int len, uint8_t *out);
-void sha224(uint8_t *buf, int len, uint8_t *out);
-void sha224_with_key(uint8_t *key, uint8_t *buf, int len, uint8_t *out);
-void sha224_hash_block(uint8_t *buf, uint32_t *hash);
-void hmac_sha256(uint8_t *key, int keylen, uint8_t *buf, int len, uint8_t *out);
-void sha256(uint8_t *buf, int len, uint8_t *out);
-void sha256_with_key(uint8_t *key, uint8_t *buf, int len, uint8_t *out);
-void sha256_hash_block(uint8_t *buf, uint32_t *hash);
-void hmac_sha384(uint8_t *key, int keylen, uint8_t *buf, int len, uint8_t *out);
-void sha384(uint8_t *buf, int len, uint8_t *out);
-void sha384_with_key(uint8_t *key, uint8_t *buf, int len, uint8_t *out);
-void sha384_hash_block(uint8_t *buf, uint64_t *hash);
-void hmac_sha512(uint8_t *key, int keylen, uint8_t *buf, int len, uint8_t *out);
-void sha512(uint8_t *buf, int len, uint8_t *out);
-void sha512_with_key(uint8_t *key, uint8_t *buf, int len, uint8_t *out);
-void sha512_hash_block(uint8_t *buf, uint64_t *hash);
-
-#include "../src/md5.c"
-#include "../src/sha1.c"
-#include "../src/sha224.c"
-
-#undef K
-#include "../src/sha256.c"
-
-#undef K
-#undef ROTR
-#undef Sigma0
-#undef Sigma1
-#undef sigma0
-#undef sigma1
-#include "../src/sha384.c"
-
-#undef K
-#include "../src/sha512.c"
-
-void test_md5(void);
-void test_sha1(void);
-void test_sha224(void);
-void test_sha256(void);
-void test_sha384(void);
-void test_sha512(void);
-
-int
-main(void)
+void
+selftest(void)
 {
 	test_md5();
 	test_sha1();
@@ -62,7 +7,10 @@ main(void)
 	test_sha256();
 	test_sha384();
 	test_sha512();
-	printf("ok\n");
+
+	ec_test();
+
+	exit(0);
 }
 
 void
@@ -78,6 +26,8 @@ test_md5(void)
 	int i;
 	char s[33];
 	uint8_t hash[16];
+
+	printf("testing md5\n");
 
 	md5((uint8_t *) "", 0, hash);
 
@@ -119,6 +69,8 @@ test_sha1(void)
 	char s[41];
 	uint8_t hash[20];
 
+	printf("testing sha1\n");
+
 	sha1((uint8_t *) "", 0, hash);
 
 	for (i = 0; i < 20; i++)
@@ -158,6 +110,8 @@ test_sha224(void)
 	int i;
 	char s[57];
 	uint8_t hash[28];
+
+	printf("testing sha224\n");
 
 	sha224((uint8_t *) "", 0, hash);
 
@@ -203,6 +157,8 @@ test_sha256(void)
 	char s[65];
 	uint8_t hash[32];
 
+	printf("testing sha256\n");
+
 	sha256((uint8_t *) "", 0, hash);
 
 	for (i = 0; i < 32; i++)
@@ -242,6 +198,8 @@ test_sha384(void)
 	int i;
 	char s[97];
 	uint8_t hash[48];
+
+	printf("testing sha384\n");
 
 	sha384((uint8_t *) "", 0, hash);
 
@@ -286,6 +244,8 @@ test_sha512(void)
 	int i;
 	char s[129];
 	uint8_t hash[64];
+
+	printf("testing sha512\n");
 
 	sha512((uint8_t *) "", 0, hash);
 
