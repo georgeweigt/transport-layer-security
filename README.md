@@ -1,5 +1,3 @@
-[ssl-notes.pdf](https://georgeweigt.github.io/ssl-notes.pdf)
-
 The following demo program uses bespoke https to get a web page.
 
 To build and run
@@ -47,3 +45,5 @@ To run a self test
 ```
 ./demo selftest
 ```
+
+[ssl-notes.pdf](https://georgeweigt.github.io/ssl-notes.pdf)
