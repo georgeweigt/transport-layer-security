@@ -1,14 +1,11 @@
 .PHONY: clean
 
-CC = gcc
-CFLAGS = -Wall -O0 -include defs.h
+demo: *.h *.c
+	gcc -Wall -O0 -o demo -include defs.h *.c -lm
 
-objs := $(shell ls *.c | sed "s/\.c/\.o/g")
-
-demo: $(objs)
-	gcc -o demo $(objs)
-
-$(objs): defs.h ssl.h cert.h ec.h extern.h prototypes.h
+prototypes.h: *.c
+	make -s -C ../tools make-prototypes
+	../tools/make-prototypes . > prototypes.h
 
 clean:
-	rm -f *.o demo
+	rm -f demo
