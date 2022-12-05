@@ -1,6 +1,6 @@
 .PHONY: clean
 
-# specify prototypes.h explicity in case the file is missing
+# specify prototypes.h in case the file is missing
 
 demo: prototypes.h *.h *.c
 	gcc -Wall -O0 -o demo -include defs.h *.c -lm
