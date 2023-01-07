@@ -1,5 +1,3 @@
-static uint32_t w[44], v[44];
-
 // Expanded key layout:
 //			 _______
 // expanded_key		|	|
@@ -19,14 +17,13 @@ static uint32_t w[44], v[44];
 void
 aes128_init(struct ssl_session *p, uint8_t *encrypt_key, uint8_t *decrypt_key, uint8_t *encrypt_iv, uint8_t *decrypt_iv)
 {
+	uint32_t w[44], v[44];
 	p->expanded_key = p->expanded_key_tab;
 	while (((unsigned long long) p->expanded_key) & 0xf)
 		p->expanded_key++; // align
-//	iEncExpandKey128(encrypt_key, p->expanded_key);
-//	iDecExpandKey128(decrypt_key, p->expanded_key + 272);
-	key_expansion(encrypt_key);
+	key_expansion(encrypt_key, w, v);
 	memcpy(p->expanded_key, w, 176);
-	key_expansion(decrypt_key);
+	key_expansion(decrypt_key, w, v);
 	memcpy(p->expanded_key + 272, v, 176);
 	if (p->tls_version == TLS_V10) {
 		memcpy(p->expanded_key + 256, encrypt_iv, 16);
@@ -173,7 +170,7 @@ aes_init()
 // Initialize w[44] and v[44] from encryption key
 
 void
-key_expansion(uint8_t *key)
+key_expansion(uint8_t *key, uint32_t *w, uint32_t *v)
 {
 	int i;
 	uint32_t *k, t;

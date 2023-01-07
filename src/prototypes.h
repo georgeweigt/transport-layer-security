@@ -3,7 +3,7 @@ void aes128_encrypt(struct ssl_session *p, unsigned char *buf, int num_blocks);
 void aes128_decrypt(struct ssl_session *p, unsigned char *buf, int num_blocks);
 int mul(int a, int b);
 void aes_init();
-void key_expansion(uint8_t *key);
+void key_expansion(uint8_t *key, uint32_t *w, uint32_t *v);
 void encrypt_nib(uint32_t *w, uint8_t *in, uint8_t *out);
 void decrypt_nib(uint32_t *v, uint8_t *in, uint8_t *out);
 int read_cert_files();
