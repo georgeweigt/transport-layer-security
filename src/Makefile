@@ -3,7 +3,7 @@
 HFILES := $(shell ls *.h)
 CFILES := $(shell ls *.c)
 
-# specify prototypes.h in case it is missing
+# specify prototypes.h in case it's missing from HFILES
 
 demo: prototypes.h $(HFILES) $(CFILES)
 	gcc -Wall -O0 -o demo -include defs.h -include prototypes.h $(CFILES) -lm
