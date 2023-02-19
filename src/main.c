@@ -13,6 +13,8 @@ main(int argc, char **argv)
 		exit(1);
 	}
 
+	srandom(time(NULL));
+
 	aes_init();
 	ec_init();
 
