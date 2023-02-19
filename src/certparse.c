@@ -693,7 +693,7 @@ convert_generalized_time(unsigned char *s, int len)
 	struct tm tm;
 	time_t t;
 
-	if (len != 15 || s[14] != 'Z')  // RFC 5280, p. 23
+	if (len != 15 || s[14] != 'Z') // RFC 5280, p. 23
 		return (time_t) -1;
 
 	// check that all digits are 0-9

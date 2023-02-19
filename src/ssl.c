@@ -1551,8 +1551,8 @@ compute_master_secret_v12(struct ssl_session *p)
 			// A(i) = HMAC_hash(secret, A(i-1))
 			hmac_sha256(p->secret, 48, buf, 32, buf);
 		// P_hash(secret, seed) = HMAC_hash(secret, A(1) + seed) +
-		//                        HMAC_hash(secret, A(2) + seed) +
-		//                        HMAC_hash(secret, A(3) + seed) + ...
+		// HMAC_hash(secret, A(2) + seed) +
+		// HMAC_hash(secret, A(3) + seed) + ...
 		hmac_sha256(p->secret, 48, buf, 109, out + 32 * i);
 	}
 
@@ -1674,8 +1674,8 @@ compute_keys_v10(struct ssl_session *p, uint8_t *kmat)
 			// A(i) = HMAC_hash(secret, A(i-1))
 			hmac_md5(p->secret, 24, buf, 16, buf);
 		// P_hash(secret, seed) = HMAC_hash(secret, A(1) + seed) +
-		//                        HMAC_hash(secret, A(2) + seed) +
-		//                        HMAC_hash(secret, A(3) + seed) + ...
+		// HMAC_hash(secret, A(2) + seed) +
+		// HMAC_hash(secret, A(3) + seed) + ...
 		hmac_md5(p->secret, 24, buf, 16 + 13 + 32 + 32, md5_out + 16 * i);
 	}
 
@@ -1694,8 +1694,8 @@ compute_keys_v10(struct ssl_session *p, uint8_t *kmat)
 			// A(i) = HMAC_hash(secret, A(i-1))
 			hmac_sha1(p->secret + 24, 24, buf, 20, buf);
 		// P_hash(secret, seed) = HMAC_hash(secret, A(1) + seed) +
-		//                        HMAC_hash(secret, A(2) + seed) +
-		//                        HMAC_hash(secret, A(3) + seed) + ...
+		// HMAC_hash(secret, A(2) + seed) +
+		// HMAC_hash(secret, A(3) + seed) + ...
 		hmac_sha1(p->secret + 24, 24, buf, 20 + 13 + 32 + 32, sha1_out + 20 * i);
 	}
 
@@ -1725,8 +1725,8 @@ compute_keys_v12(struct ssl_session *p, uint8_t *kmat)
 			// A(i) = HMAC_hash(secret, A(i-1))
 			hmac_sha256(p->secret, 48, buf, 32, buf);
 		// P_hash(secret, seed) = HMAC_hash(secret, A(1) + seed) +
-		//                        HMAC_hash(secret, A(2) + seed) +
-		//                        HMAC_hash(secret, A(3) + seed) + ...
+		// HMAC_hash(secret, A(2) + seed) +
+		// HMAC_hash(secret, A(3) + seed) + ...
 		hmac_sha256(p->secret, 48, buf, 109, kmat + 32 * i);
 	}
 }

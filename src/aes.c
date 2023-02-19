@@ -183,7 +183,7 @@ key_expansion(uint8_t *key, uint32_t *w, uint32_t *v)
 	k[3] = key[15] << 24 | key[14] << 16 | key[13] << 8 | key[12];
 
 	for (i = 0; i < 10; i++) {
-		t  = k[3];
+		t = k[3];
 		k[4] = k[0] ^ (etab2[t >> 8 & 0xff] & 0xff) ^ (etab3[t >> 16 & 0xff] & 0xff00) ^ (etab0[t >> 24] & 0xff0000) ^ (etab1[t & 0xff] & 0xff000000) ^ rcon[i];
 		k[5] = k[1] ^ k[4];
 		k[6] = k[2] ^ k[5];
@@ -395,10 +395,10 @@ decrypt_nib(uint32_t *v, uint8_t *in, uint8_t *out)
 	t2 = dtab0[s20] ^ dtab1[s11] ^ dtab2[s02] ^ dtab3[s33] ^ v[6];
 	t3 = dtab0[s30] ^ dtab1[s21] ^ dtab2[s12] ^ dtab3[s03] ^ v[7];
 
-	s0 = inv_sbox[t00] ^ inv_sbox[t31] <<  8 ^ inv_sbox[t22] << 16 ^ inv_sbox[t13] << 24 ^ v[0];
-	s1 = inv_sbox[t10] ^ inv_sbox[t01] <<  8 ^ inv_sbox[t32] << 16 ^ inv_sbox[t23] << 24 ^ v[1];
-	s2 = inv_sbox[t20] ^ inv_sbox[t11] <<  8 ^ inv_sbox[t02] << 16 ^ inv_sbox[t33] << 24 ^ v[2];
-	s3 = inv_sbox[t30] ^ inv_sbox[t21] <<  8 ^ inv_sbox[t12] << 16 ^ inv_sbox[t03] << 24 ^ v[3];
+	s0 = inv_sbox[t00] ^ inv_sbox[t31] << 8 ^ inv_sbox[t22] << 16 ^ inv_sbox[t13] << 24 ^ v[0];
+	s1 = inv_sbox[t10] ^ inv_sbox[t01] << 8 ^ inv_sbox[t32] << 16 ^ inv_sbox[t23] << 24 ^ v[1];
+	s2 = inv_sbox[t20] ^ inv_sbox[t11] << 8 ^ inv_sbox[t02] << 16 ^ inv_sbox[t33] << 24 ^ v[2];
+	s3 = inv_sbox[t30] ^ inv_sbox[t21] << 8 ^ inv_sbox[t12] << 16 ^ inv_sbox[t03] << 24 ^ v[3];
 
 	out[0] = s0;
 	out[1] = s0 >> 8;
