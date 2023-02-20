@@ -17,5 +17,4 @@ clean:
 
 checkall:
 	make -s -C ../tools wcheck
-	for FILE in $(HFILES); do ../tools/wcheck $$FILE; done
-	for FILE in $(CFILES); do ../tools/wcheck $$FILE; done
+	for FILE in *.h *.c; do ../tools/wcheck $$FILE; done
