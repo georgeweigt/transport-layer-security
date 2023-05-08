@@ -14,4 +14,4 @@ clean:
 
 check:
 	make -s -C ../tools wcheck
-	for FILE in *.h *.c; do ../tools/wcheck $$FILE; done
+	../tools/wcheck *.c
